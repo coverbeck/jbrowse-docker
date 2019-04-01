@@ -14,11 +14,11 @@ RUN mkdir -p /jbrowse/ && \
 
 WORKDIR /jbrowse/
 
-# Download ICGC Viewer
-RUN git clone https://github.com/agduncan94/icgc-viewer /icgc-viewer/ && \
-    cd /icgc-viewer/ && \
+# Download GDC Viewer
+RUN git clone https://github.com/agduncan94/gdc-viewer /gdc-viewer/ && \
+    cd /gdc-viewer/ && \
     git checkout develop && \
-    cp -r icgc-viewer /jbrowse/plugins/icgc-viewer && \
+    cp -r gdc-viewer /jbrowse/plugins/gdc-viewer && \
     cat ./data/jbrowse.conf > /jbrowse/jbrowse.conf
 
 # Setup JBrowse
