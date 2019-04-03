@@ -1,5 +1,7 @@
 FROM node:latest
 
+LABEL maintainer="andrew.duncan@oicr.on.ca"
+
 ENV JBROWSE_VERSION 1.16.3
 
 # Install dependencies

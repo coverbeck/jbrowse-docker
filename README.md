@@ -6,33 +6,23 @@ Inspired by [enuggetry/docker-jbrowse](https://github.com/enuggetry/docker-jbrow
 
 ### Dockerfile
 #### Setup data
-Place your track data in ./data. This maps to /jbrowse/data in the container, which is where JBrowse stores reference data and track information.
+**Important**: Place your track data in `./data`. This maps to `/jbrowse/data` in the container, which is where JBrowse stores reference data and track information. You can also access `/jbrowse/bin`, though you may have to sudo from outside the container.
 
 #### Build the docker image
+You'll have 3 options to choose from, and you should build the dockerfile in the corresponding folder. One is a general JBrowse Express image. You can find more information about them at [icgc-viewer](https://github.com/agduncan94/icgc-viewer) and [gdc-viewer](https://github.com/agduncan94/gdc-viewer). The other two are similar images but with either the ICGC or GDC JBrowse plugins installed.
 
-`docker build . -t jbrowse-express`
+`docker build . -t <tag-name>`
 
 #### Run the docker image
-`docker run -p 3000:3000 -v ./data:/jbrowse/data jbrowse-express utils/jb_run.js -p 3000`
+`docker run -p 3000:3000 -v {pwd}/data:/jbrowse/data <tag-name> utils/jb_run.js -p 3000`
 
 Note: You can run in the background using the detach mode (-d)
 
-`docker run -d -p 3000:3000 -v ./data:/jbrowse/data jbrowse-express utils/jb_run.js -p 3000`
+`docker run -d -p 3000:3000 -v {pwd}/data:/jbrowse/data <tag-name> utils/jb_run.js -p 3000`
 
 ### Docker Compose
 #### Build docker-compose
 `docker-compose build`
-
-#### Load refseq and tracks
-If you already have your tracks.conf and seq/, etc., you can simply put these files into your `./data` directory.
-
-As an example, we will load Chr1 as a reference sequence.
-
-```
-wget http://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/Homo_sapiens.GRCh37.75.dna.chromosome.1.fa.gz
-
-jbrowse/bin/prepare-refseqs.pl --fasta Homo_sapiens.GRCh37.75.dna.chromosome.1.fa.gz
-```
 
 #### Run the docker-compose
 `docker-compose up`
@@ -40,6 +30,19 @@ jbrowse/bin/prepare-refseqs.pl --fasta Homo_sapiens.GRCh37.75.dna.chromosome.1.f
 Note: You can run in the background using the detach mode (-d)
 
 `docker-compose up -d`
+
+#### Load refseq and tracks
+If you already have your tracks.conf and seq/, etc., you can simply put these files into your `./data` directory.
+
+As an example, we will load Chr1 as a reference sequence. Unfortunately you need JBrowse to prepare refseq, so you can either go into the docker container and run the following or clone JBrowse on your host system, run `./setup.sh` and then run the following on the host.
+
+```
+# Download a FASTA file
+wget http://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/Homo_sapiens.GRCh37.75.dna.chromosome.1.fa.gz
+
+# Prepare refseqs
+jbrowse/bin/prepare-refseqs.pl --fasta ./data/Homo_sapiens.GRCh37.75.dna.chromosome.1.fa.gz
+```
 
 #### Enter the Docker Container
 

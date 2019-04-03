@@ -1,7 +1,10 @@
 FROM node:latest
 
+LABEL maintainer="andrew.duncan@oicr.on.ca"
+
 ENV JBROWSE_VERSION 1.16.3
 
+# Install dependencies
 RUN apt-get -qq update --fix-missing
 RUN apt-get --no-install-recommends -y install git build-essential zlib1g-dev libxml2-dev libexpat-dev postgresql-client libpq-dev ca-certificates curl
 
