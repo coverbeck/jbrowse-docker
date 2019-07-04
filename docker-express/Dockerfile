@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:10.16.0-jessie
 
 LABEL maintainer="andrew.duncan@oicr.on.ca"
 
@@ -17,11 +17,11 @@ RUN mkdir -p /jbrowse/ && \
 WORKDIR /jbrowse/
 
 # Setup JBrowse
-RUN ./setup.sh && \
-    ./bin/cpanm --force JSON Hash::Merge PerlIO::gzip Devel::Size \
-    Heap::Simple Heap::Simple::XS List::MoreUtils Exception::Class Test::Warn Bio::Perl \
-    Bio::DB::SeqFeature::Store File::Next Bio::DB::Das::Chado && \
-    rm -rf /root/.cpan/
+#RUN ./setup.sh && \
+#    ./bin/cpanm --force JSON Hash::Merge PerlIO::gzip Devel::Size \
+#    Heap::Simple Heap::Simple::XS List::MoreUtils Exception::Class Test::Warn Bio::Perl \
+#    Bio::DB::SeqFeature::Store File::Next Bio::DB::Das::Chado && \
+#    rm -rf /root/.cpan/
 
 # Expose port 3000
 EXPOSE 3000
