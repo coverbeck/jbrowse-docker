@@ -17,7 +17,7 @@ RUN mkdir -p /jbrowse/ && \
 WORKDIR /jbrowse/
 
 # Setup JBrowse
-RUN ./setup.sh #  && \
+# RUN ./setup.sh && \
 #    ./bin/cpanm --force JSON Hash::Merge PerlIO::gzip Devel::Size \
 #    Heap::Simple Heap::Simple::XS List::MoreUtils Exception::Class Test::Warn Bio::Perl \
 #    Bio::DB::SeqFeature::Store File::Next Bio::DB::Das::Chado && \
