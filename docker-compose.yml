@@ -1,7 +1,7 @@
 version: '3'
 services:
   jbrowse:
-    image: quay.io/coverbeck/jbrowse:v0.1
+    image: quay.io/coverbeck/jbrowse:v0.2
     container_name: ${JBROWSE_NAME:-jbrowse}
     command: utils/jb_run.js -p 3000
     ports:
